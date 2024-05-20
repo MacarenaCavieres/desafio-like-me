@@ -17,6 +17,18 @@ const postOnePost = async (req, res) => {
 
         const data = await Post.postOne(usuario, url, descripcion);
 
+        return res.status(201).json(data);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ ok: false, msg: "Error de servidor" });
+    }
+};
+
+const updateOnePost = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const data = await Post.updateOne(id);
         return res.json(data);
     } catch (error) {
         console.error(error);
@@ -27,4 +39,5 @@ const postOnePost = async (req, res) => {
 export const postMethod = {
     getAllPosts,
     postOnePost,
+    updateOnePost,
 };
